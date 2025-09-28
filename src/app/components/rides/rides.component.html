@@ -1,0 +1,64 @@
+<!-- <p>rides works!</p> -->
+
+<!-- <h1 class="title">Transport Facility Management</h1> -->
+
+<div class="container">
+ 
+  <div class="section">
+    <h2>Add a Ride</h2>
+
+    <form [formGroup]="rideForm" (ngSubmit)="addRide()">
+
+      <label>Employee ID</label>
+      <input formControlName="empId" type="text" />
+      <small *ngIf="hasErrorControl('empId','required')">Employee ID is required</small>
+
+      <label>Vehicle Type</label>
+      <select formControlName="vehicleType">
+        <option value="Bike">Bike</option>
+        <option value="Car">Car</option>
+      </select>
+
+      <label>Vehicle Number</label>
+      <input formControlName="vehicleNo" type="text" />
+      <small *ngIf="hasErrorControl('vehicleNo','required')">Vehicle No is required</small>
+      <small *ngIf="hasErrorControl('vehicleNo','pattern')">Invalid vehicle number format (e.g., KA01AB1234)</small>
+
+      <label>Vacant Seats</label>
+      <input formControlName="seats" type="number" />
+      <small *ngIf="hasErrorControl('seats','required')">Seats required</small>
+      <small *ngIf="hasErrorControl('seats','min')">At least 1 seat</small>
+
+      <label>Time</label>
+      <input formControlName="time" type="time" />
+      <small *ngIf="hasErrorControl('time','required')">Time is required</small>
+
+      <label>Pick-up Point</label>
+      <input formControlName="pickup" type="text" />
+      <small *ngIf="hasErrorControl('pickup','required')">Pick-up is required</small>
+
+      <label>Destination</label>
+      <input formControlName="destination" type="text" />
+      <small *ngIf="hasErrorControl('destination','required')">Destination is required</small>
+
+      <button type="submit">Submit</button>
+    </form>
+  </div>
+
+
+  <div class="section">
+    <h2>Available Rides</h2>
+    <input type="text" placeholder="Search by Vehicle Type..." [(ngModel)]="searchTerm" />
+
+    <div *ngFor="let ride of filteredRides; let i = index" class="ride">
+      <p><b>Employee ID:</b> {{ ride.empId }}</p>
+      <p><b>Vehicle Type:</b> {{ ride.vehicleType }}</p>
+      <p><b>Time:</b> {{ ride.time }}</p>
+      <p><b>Pick-up:</b> {{ ride.pickup }}</p>
+      <p><b>Destination:</b> {{ ride.destination }}</p>
+      <p><b>Vacant Seats:</b> {{ ride.seats }}</p>
+      <button (click)="bookRide(i)">Book</button>
+    </div>
+  </div>
+</div>
+

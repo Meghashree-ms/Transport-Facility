@@ -1,0 +1,14 @@
+
+<header class="app-header">
+  <h2>Transport Facility Management</h2>
+  <div class="profile-section">
+    <mat-icon (click)="toggleProfile()" >account_circle</mat-icon>
+    <!-- <img src="assets/profile.png" alt="Profile" class="profile-icon" (click)="toggleProfile()" /> -->
+    <div *ngIf="showProfile" class="profile-details">
+      <p><strong>Employee ID:</strong> {{ employee.id }}</p>
+      <p><strong>Name:</strong> {{ employee.name }}</p>
+      <p><strong>Email:</strong> {{ employee.email }}</p>
+    </div>
+  </div>
+</header>
+
