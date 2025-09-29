@@ -1,13 +1,40 @@
-<!-- <p>login works!</p> -->
-
 
 <div class="login-container">
   <h2>Employee Login</h2>
-  <form (ngSubmit)="onLogin()" #loginForm="ngForm">
+  <!-- <form (ngSubmit)="onLogin()" #loginForm="ngForm">
     <div>
       <label>Employee ID</label>
       <input type="text" name="employeeId" [(ngModel)]="employeeId" required />
     </div>
-    <button type="submit" [disabled]="!loginForm.valid">Login</button>
-  </form>
+    <button type="submit" [disabled]="!log/inForm.valid">Login</button>
+  </form> -->
+
+  <form (ngSubmit)="onLogin()" #loginForm="ngForm">
+
+  <mat-form-field appearance="outline" class="full-width">
+    <mat-label>Employee ID</mat-label>
+    <input 
+      matInput 
+      type="text" 
+    name="employeeId" 
+      [(ngModel)]="employeeId" 
+    required 
+      pattern="^EMP[0-9]{3,5}$" 
+      #empId="ngModel"
+      placeholder="Enter Employee ID"
+    >
+    <mat-error *ngIf="empId.errors?.required && empId.touched">
+      Employee ID is required
+    </mat-error>
+    <mat-error *ngIf="empId.errors?.pattern && empId.touched">
+      Employee ID must be in format EMP123
+    </mat-error>
+  </mat-form-field>
+
+  <button mat-raised-button color="primary" type="submit" [disabled]="!loginForm.valid" class="full-width">
+    Login
+  </button>
+
+</form>
+
 </div>

@@ -25,13 +25,21 @@ export class RidesComponent implements OnInit {
    currentEmployeeId:any = 123;
   constructor(private fb: FormBuilder) {
     this.rideForm = this.fb.group({
-      empId: ['', Validators.required],
-      vehicleType: ['Bike', Validators.required],
-      vehicleNo: ['', Validators.required,Validators.pattern('^[A-Z]{2}[0-9]{2}[A-Z]{1,2}[0-9]{3,4}$')],
-      seats: [1, [Validators.required, Validators.min(1)]],
-      time: ['', Validators.required],
-      pickup: ['', Validators.required],
-      destination: ['', Validators.required]
+
+       empId: ['', [Validators.required, Validators.pattern(/^EMP[0-9]{3,5}$/)]],
+  vehicleType: ['', Validators.required],
+  vehicleNo: ['', [Validators.required, Validators.pattern(/^[A-Z]{2}[0-9]{2}[A-Z]{1,2}[0-9]{4}$/)]],
+  seats: ['', [Validators.required, Validators.min(1)]],
+  time: ['', Validators.required],
+  pickup: ['', Validators.required],
+  destination: ['', Validators.required]
+      // empId: ['', Validators.required,  Validators.pattern(/^EMP\d{4}$/)],
+      // vehicleType: ['Bike', Validators.required],
+      // vehicleNo: ['', Validators.required,Validators.pattern('^[A-Z]{2}[0-9]{2}[A-Z]{1,2}[0-9]{3,4}$')],
+      // seats: [1, [Validators.required, Validators.min(1)]],
+      // time: ['', Validators.required],
+      // pickup: ['', Validators.required],
+      // destination: ['', Validators.required]
     });
   }
 
@@ -70,6 +78,7 @@ addRide() {
   });
 
   alert("Ride added successfully!");
+  
 }
 
 

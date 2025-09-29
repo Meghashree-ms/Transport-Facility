@@ -15,3 +15,8 @@ button {
   padding: 10px;
   cursor: pointer;
 }
+.full-width {
+  width: 100%;
+  display: block;
+  margin-bottom: 16px;
+}

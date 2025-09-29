@@ -33,13 +33,7 @@ label {
   font-weight: bold;
 }
 
-input, select {
-  width: 100%;
-  padding: 6px;
-  margin-top: 4px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-}
+
 
 button {
   margin-top: 15px;
@@ -63,4 +57,10 @@ button:hover {
 small {
   color: red;
   font-size: 12px;
+}
+
+.full-width {
+  width: 100%;
+  display: block;
+  margin-bottom: 16px;
 }

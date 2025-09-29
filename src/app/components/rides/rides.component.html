@@ -1,54 +1,88 @@
-<!-- <p>rides works!</p> -->
-
-<!-- <h1 class="title">Transport Facility Management</h1> -->
-
 <div class="container">
- 
   <div class="section">
     <h2>Add a Ride</h2>
 
     <form [formGroup]="rideForm" (ngSubmit)="addRide()">
 
-      <label>Employee ID</label>
-      <input formControlName="empId" type="text" />
-      <small *ngIf="hasErrorControl('empId','required')">Employee ID is required</small>
+      <!-- Employee ID -->
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Employee ID</mat-label>
+        <input matInput formControlName="empId" placeholder="Enter Employee ID">
+        <mat-error *ngIf="rideForm.get('empId')?.hasError('pattern') && rideForm.get('empId')?.touched">
+    Invalid employee Id  format (e.g., EMP1234)
+  </mat-error>
+        <mat-error *ngIf="hasErrorControl('empId','required')">
+          Employee ID is required
+        </mat-error>
+      </mat-form-field>
 
-      <label>Vehicle Type</label>
-      <select formControlName="vehicleType">
-        <option value="Bike">Bike</option>
-        <option value="Car">Car</option>
-      </select>
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Vehicle Type</mat-label>
+        <mat-select formControlName="vehicleType">
+          <mat-option value="Bike">Bike</mat-option>
+          <mat-option value="Car">Car</mat-option>
+        </mat-select>
+      </mat-form-field>
 
-      <label>Vehicle Number</label>
-      <input formControlName="vehicleNo" type="text" />
-      <small *ngIf="hasErrorControl('vehicleNo','required')">Vehicle No is required</small>
-      <small *ngIf="hasErrorControl('vehicleNo','pattern')">Invalid vehicle number format (e.g., KA01AB1234)</small>
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Vehicle Number</mat-label>
+        <input matInput formControlName="vehicleNo" placeholder="KA01AB1234">
+        <mat-error *ngIf="hasErrorControl('vehicleNo','required')">
+          Vehicle No is required
+        </mat-error>
+         <mat-error *ngIf="rideForm.get('vehicleNo')?.hasError('pattern') && rideForm.get('vehicleNo')?.touched">
+    Invalid vehicle number format (e.g., KA01AB1234)
+  </mat-error>
+      </mat-form-field>
 
-      <label>Vacant Seats</label>
-      <input formControlName="seats" type="number" />
-      <small *ngIf="hasErrorControl('seats','required')">Seats required</small>
-      <small *ngIf="hasErrorControl('seats','min')">At least 1 seat</small>
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Vacant Seats</mat-label>
+        <input matInput type="number" formControlName="seats" placeholder="Enter seats">
+        <mat-error *ngIf="hasErrorControl('seats','required')">
+          Seats required
+        </mat-error>
+        <mat-error *ngIf="hasErrorControl('seats','min')">
+          At least 1 seat
+        </mat-error>
+      </mat-form-field>
 
-      <label>Time</label>
-      <input formControlName="time" type="time" />
-      <small *ngIf="hasErrorControl('time','required')">Time is required</small>
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Time</mat-label>
+        <input matInput type="time" formControlName="time">
+        <mat-error *ngIf="hasErrorControl('time','required')">
+          Time is required
+        </mat-error>
+      </mat-form-field>
 
-      <label>Pick-up Point</label>
-      <input formControlName="pickup" type="text" />
-      <small *ngIf="hasErrorControl('pickup','required')">Pick-up is required</small>
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Pick-up Point</mat-label>
+        <input matInput formControlName="pickup" placeholder="Enter pick-up point" type="text">
+        <mat-error *ngIf="hasErrorControl('pickup','required')">
+          Pick-up is required
+        </mat-error>
+      </mat-form-field>
 
-      <label>Destination</label>
-      <input formControlName="destination" type="text" />
-      <small *ngIf="hasErrorControl('destination','required')">Destination is required</small>
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Destination</mat-label>
+        <input matInput formControlName="destination" placeholder="Enter destination" type="text">
+        <mat-error *ngIf="hasErrorControl('destination','required')">
+          Destination is required
+        </mat-error>
+      </mat-form-field>
 
-      <button type="submit">Submit</button>
+      <button mat-raised-button color="primary" type="submit" class="full-width">
+        Submit
+      </button>
     </form>
   </div>
 
-
   <div class="section">
     <h2>Available Rides</h2>
-    <input type="text" placeholder="Search by Vehicle Type..." [(ngModel)]="searchTerm" />
+
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Search by Vehicle Type</mat-label>
+      <input matInput placeholder="Enter vehicle type..." [(ngModel)]="searchTerm">
+    </mat-form-field>
 
     <div *ngFor="let ride of filteredRides; let i = index" class="ride">
       <p><b>Employee ID:</b> {{ ride.empId }}</p>
@@ -57,8 +91,9 @@
       <p><b>Pick-up:</b> {{ ride.pickup }}</p>
       <p><b>Destination:</b> {{ ride.destination }}</p>
       <p><b>Vacant Seats:</b> {{ ride.seats }}</p>
-      <button (click)="bookRide(i)">Book</button>
+      <button mat-raised-button color="accent" (click)="bookRide(i)">
+        Book
+      </button>
     </div>
   </div>
 </div>
-
